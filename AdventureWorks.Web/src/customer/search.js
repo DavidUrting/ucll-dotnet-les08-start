@@ -1,12 +1,11 @@
-﻿console.log("Hello");
-document.getElementById("searchButton").addEventListener("click", function (e) {
+﻿document.getElementById("searchButton").addEventListener("click", function (e) {
     // vorige resultaten leegmaken.
     $("#customers tbody tr").remove();
 
     // keyword achterhalen. Indien leeg: geen query doen.
     let keyword = document.getElementById("keywordInput").value;
     if (keyword) {
-        $.get("/customer/searchv2_json?keyword=" + keyword, function (result) {
+        $.post("/customer/search?keyword=" + keyword, function (result) {
             for (let i = 0; i < result.length; i++) {
                 $("#customers").find('tbody').append(
                     '<tr><td>' + result[i].id +

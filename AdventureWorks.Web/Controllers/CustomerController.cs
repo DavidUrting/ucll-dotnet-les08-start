@@ -12,36 +12,14 @@ namespace AdventureWorks.Web.Controllers
 {
     public class CustomerController : Controller
     {
-        // Tonen van een zoekcriteria scherm
         public IActionResult Search()
-        {
-            SearchViewModel vm = new SearchViewModel();
-            return View("SearchCriteria", vm);
-        }
-
-        // Tonen van zoekresultaten
-        [HttpPost]
-        public IActionResult Search(string keyword)
-        {
-            CustomerManager cm = new CustomerManager();
-            var customers = cm.SearchCustomers(keyword)
-                .Select(c => new CustomerViewModel() 
-                { 
-                    Id = c.Id, 
-                    FirstName = c.FirstName, 
-                    LastName = c.LastName,
-                    Email = c.Email
-                });
-            return View("SearchResults", customers);
-        }
-
-        public IActionResult SearchV2()
         {
             SearchViewModel vm = new SearchViewModel();
             return View(vm);
         }
 
-        public IActionResult SearchV2_Json(string keyword)
+        [HttpPost]
+        public IActionResult Search(string keyword)
         {
             CustomerManager cm = new CustomerManager();
             var customers = cm.SearchCustomers(keyword)
@@ -66,7 +44,8 @@ namespace AdventureWorks.Web.Controllers
                 {
                     Id = c.Id,
                     FirstName = c.FirstName,
-                    LastName = c.LastName
+                    LastName = c.LastName,
+                    Email = c.Email
                 };
                 return View(vm);
             }

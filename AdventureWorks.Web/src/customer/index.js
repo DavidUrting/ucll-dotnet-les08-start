@@ -1,1 +1,1 @@
-﻿import "./searchv2";
+﻿import "./search";
